@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blue Genie Travel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #007BFF, #00C6FF);
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px auto;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+    }
+    button:hover { background: #0056b3; }
+    .hidden { display: none; }
+    .genie {
+      width: 100px;
+      margin: 10px auto;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page 1: Login -->
+  <div id="loginPage" class="card">
+    <img src="blue-genie.png" alt="Blue Genie" class="genie">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username"><br>
+    <input type="text" id="mobile" placeholder="+91 Mobile Number">
+    <button onclick="sendOTP()">Send OTP</button><br>
+    <button onclick="verifyOTP()">Verify OTP</button>
+    <button onclick="showPage('historyPage')">Travel History</button>
+  </div>
+
+  <!-- Page 2: Dashboard -->
+  <div id="dashboardPage" class="card hidden">
+    <img src="blue-genie.png" alt="Blue Genie" class="genie">
+    <h2 id="welcomeText"></h2>
+    <button onclick="showPage('planPage')">Plan Trip</button>
+    <button onclick="showPage('bookingPage')">Book Tickets</button>
+    <button onclick="showPage('historyPage')">Travel History</button>
+    <button onclick="showPage('paymentPage')">Payments</button>
+  </div>
+
+  <!-- Page 3: Plan Trip -->
+  <div id="planPage" class="card hidden">
+    <h2>Plan Your Trip</h2>
+    <input type="text" placeholder="Destination"><br>
+    <input type="date"><br>
+    <select>
+      <option>Budget</option>
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+    </select><br>
+    <label><input type="checkbox"> Food</label>
+    <label><input type="checkbox"> Adventure</label>
+    <label><input type="checkbox"> Culture</label>
+    <label><input type="checkbox"> Relaxation</label><br>
+    <button onclick="showPage('itineraryPage')">Generate Itinerary</button>
+  </div>
+
+  <!-- Page 4: Itinerary -->
+  <div id="itineraryPage" class="card hidden">
+    <h2>Your Itinerary</h2>
+    <p>Day 1: Morning – City Tour</p>
+    <p>Afternoon – Museum</p>
+    <p>Evening – Dinner Cruise</p>
+    <button onclick="alert('Alternate itinerary shown')">Replan</button>
+  </div>
+
+  <!-- Page 5: Emergency Safety -->
+  <div id="emergencyPage" class="card hidden">
+    <h2>Emergency Safety</h2>
+    <button onclick="alert('Emergency Alert Sent! Contacts: Mom, Dad, Police')">Emergency</button>
+  </div>
+
+  <!-- Page 6: Travel History -->
+  <div id="historyPage" class="card hidden">
+    <h2>Travel History</h2>
+    <table border="1" width="100%">
+      <tr><th>Destination</th><th>Dates</th><th>Status</th><th>Action</th></tr>
+      <tr><td>Paris</td><td>Jan 2025</td><td>Completed</td><td><button onclick="showPage('planPage')">Rebook</button></td></tr>
+    </table>
+  </div>
+
+  <!-- Page 7: Payments -->
+  <div id="paymentPage" class="card hidden">
+    <h2>Payments</h2>
+    <input type="text" placeholder="UPI ID"><br>
+    <input type="text" placeholder="Card Number"><br>
+    <button onclick="alert('Payment Successful!')">Pay Now</button>
+  </div>
+
+<script>
+  function showPage(pageId) {
+    document.querySelectorAll('.card').forEach(p => p.classList.add('hidden'));
+    document.getElementById(pageId).classList.remove('hidden');
+  }
+  function sendOTP() {
+    alert("OTP sent to your mobile!");
+  }
+  function verifyOTP() {
+    const user = document.getElementById('username').value;
+    document.getElementById('welcomeText').innerText = `Hello ${user}, ready for your next adventure?`;
+    showPage('dashboardPage');
+  }
+</script>
+
+</body>
+</html>
